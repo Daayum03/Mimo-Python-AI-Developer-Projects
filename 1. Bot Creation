@@ -1,11 +1,24 @@
+# Prompting user for their name and greeting them
 name = input("Hello! What is your name?")
 print(f"Nice to meet you, {name}!")
-age_input= input("How old are you?")
+
+# Asking user for their age and converting input to an integer
+age_input = input("How old are you?")
 age = int(age_input)
+
+# Overwriting age to 25 (likely intended as a default or fixed value)
 age = 25
+
+# Setting bot's age and calculating the age difference
 bot_age = 3
 age_difference = age - bot_age
+
+# Printing age difference
 print(f"You are {age_difference} years older than me. I'm only {bot_age} years old!")
+
+# Asking user for their favorite color and setting a fixed color to "blue"
 color_input = input("What's your favorite color?")
 color = "blue"
+
+# Printing the fixed color response
 print(f"Oh, {color} is a beautiful color!")
