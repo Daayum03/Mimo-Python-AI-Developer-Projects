@@ -1,0 +1,42 @@
+import requests  # Importing the requests library to handle HTTP requests
+
+# Defining a function named 'fetch_data' that takes an 'option' parameter
+def fetch_data(option):
+    # Constructing the URL using the given option
+    url = f"https://swapi.mimo.dev/api/{option}/"
+    data = []  # Initializing an empty list to store the fetched data
+    
+    try:
+        # Sending an HTTP GET request to the URL
+        response = requests.get(url)
+        # Raising an error if the response status is not successful (e.g., 404 or 500)
+        response.raise_for_status()
+
+        # Parsing the response JSON and storing it in the 'data' variable
+        data = response.json()
+        # Printing the number of entities fetched
+        print(f"Successfully fetched {len(data)} entities")
+    # Handling HTTP errors (e.g., if the request fails)
+    except requests.HTTPError as e:
+        # Printing the error message
+        print(f"Error fetching data: {e}")
+        return None  # Returning None if an error occurs
+
+    # Returning the fetched data
+    return data
+
+# Fetching data for the "people" option
+data = fetch_data("people")
+
+# If data is successfully fetched, iterate through each entity and print its name
+if data:
+    for entity in data:
+        print(entity["name"])
+else:
+    # If no data is fetched, print an error message
+    print("Unable to download data")
+
+# Prompting the user to enter an option (e.g., 'people' or 'planets')
+option = input("Enter an option (e.g., 'people' or 'planets'): ").strip().lower()
+# Fetching data using the user's input option
+data = fetch_data(option)
