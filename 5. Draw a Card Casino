@@ -1,18 +1,24 @@
-import random
-def create_deck():
-  suits = ["♥", "♦", "♣", "♠"]
-  ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-  deck = []
-  for suit in suits:
-    for rank in ranks:
-      deck.append((suit, rank))
-  return deck
+import random  # Importing the random module to shuffle the deck of cards
 
+# Function to create a standard deck of 52 cards
+def create_deck():
+    suits = ["♥", "♦", "♣", "♠"]  # Defining the four suits
+    ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]  # Defining the ranks
+    deck = []  # Initializing an empty list for the deck
+    for suit in suits:  # Looping through each suit
+        for rank in ranks:  # Looping through each rank
+            deck.append((suit, rank))  # Appending the (suit, rank) tuple to the deck
+    return deck  # Returning the complete deck
+
+# Function to display a card in ASCII format
 def show_card(card):
-  space = " "
-if len(card[1]) == 2:
-  space = ""
-print (f"""
+    # Setting the space character based on rank length
+    space = " "
+    if len(card[1]) == 2:
+        space = ""
+    
+    # Printing the card in an ASCII representation
+    print(f"""
 +-------+
 |{card[1]}     {space}|
 |       |
@@ -22,25 +28,29 @@ print (f"""
 +-------+
 """)
 
+# Function to draw a specified number of cards from the deck
 def draw_card(deck, num_cards):
-  hand = []
-  for _ in range(num_cards):
-    if deck:
-      hand.append(deck.pop())
-    else:
-      break
-  return hand, deck
+    hand = []  # Initializing an empty list to store drawn cards
+    for _ in range(num_cards):  # Looping to draw the specified number of cards
+        if deck:  # Checking if there are still cards left in the deck
+            hand.append(deck.pop())  # Removing the last card from the deck and adding it to the hand
+        else:
+            break  # Break the loop if the deck is empty
+    return hand, deck  # Returning the hand and the modified deck
 
+# Creating a deck and shuffling it
 deck = create_deck()
 random.shuffle(deck)
 
-while len(deck) > 0:
-  num_cards = int(input("How many cards do you want to draw? "))
-  if num_cards > len(deck):
-    print(f"Only {len(deck)} card(s) left in the deck, drawing all remaining cards.")
-    num_cards = len(deck)
-  hand, deck = draw_card(deck, num_cards)
-  for card in hand:
-    print(card)
+# Drawing cards from the deck until no cards are left
+while len(deck) > 0:  # Continue while there are cards left in the deck
+    num_cards = int(input("How many cards do you want to draw? "))  # Asking user how many cards they want to draw
+    if num_cards > len(deck):  # Checking if user wants to draw more cards than available
+        print(f"Only {len(deck)} card(s) left in the deck, drawing all remaining cards.")
+        num_cards = len(deck)  # Setting num_cards to the remaining number of cards
+    hand, deck = draw_card(deck, num_cards)  # Drawing the cards
+    for card in hand:  # Looping through each drawn card
+        print(card)  # Printing the drawn card
 
+# Message indicating all cards have been drawn
 print("We are out of cards")
