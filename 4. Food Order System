@@ -1,50 +1,50 @@
-italian_food = ["Pasta Bolognese","Pepperoni pizza","Margherita pizza","Lasagna"]
+# List of Italian food items available
+italian_food = ["Pasta Bolognese", "Pepperoni pizza", "Margherita pizza", "Lasagna"]
 
-indian_food = ["Curry","Chutney","Samosa","Naan"]
+# List of Indian food items available
+indian_food = ["Curry", "Chutney", "Samosa", "Naan"]
 
+# Function to find a meal by name in a given menu list
 def find_meal(name, menu):
-  return name if name in menu else None
+    return name if name in menu else None  # Returns the meal if found, otherwise returns None
 
-def select_meal(name):
-  return find_meal(name, italian_food)
-
-def display_available_meals():
-  print(f"Available Italian Meals:")
-  for meal in italian_food:
-    print(meal)
-
-def create_summary(name, amount, food_type):
-  order = select_meal(name, food_type)
-  if order:
-    return f"You ordered {amount} {name}"
-  else:
-    return "Meal not found"
-
-def display_available_meals(food_type):
-  if (food_type == "Italian"):
-    print("Available Italian Meals:")
-    for meal in italian_food:
-      print(meal)
-  elif (food_type == "Indian"):
-    print("Available Indian Meals:")
-    for meal in indian_food:
-      print(meal)
-  else:
-    print("Invalid food type")
-
+# Function to select a meal from a given cuisine type
 def select_meal(name, food_type):
-  if food_type == "Italian":
-    return find_meal(name, italian_food)
-  elif food_type == "Indian":
-    return find_meal(name, indian_food)
-  else:
-    return None
+    if food_type == "Italian":
+        return find_meal(name, italian_food)  # Look for the meal in Italian cuisine
+    elif food_type == "Indian":
+        return find_meal(name, indian_food)  # Look for the meal in Indian cuisine
+    else:
+        return None  # Return None if an invalid food type is provided
 
+# Function to display the available meals based on the cuisine type
+def display_available_meals(food_type):
+    if food_type == "Italian":
+        print("Available Italian Meals:")
+        for meal in italian_food:  # Iterating and printing all Italian meals
+            print(meal)
+    elif food_type == "Indian":
+        print("Available Indian Meals:")
+        for meal in indian_food:  # Iterating and printing all Indian meals
+            print(meal)
+    else:
+        print("Invalid food type")  # Handle incorrect food types
+
+# Function to create an order summary for a meal
+def create_summary(name, amount, food_type):
+    order = select_meal(name, food_type)  # Check if the meal is available
+    if order:
+        return f"You ordered {amount} {name}"  # Return the summary if the meal is found
+    else:
+        return "Meal not found"  # Return error message if meal is not available
+
+# Initial greeting and taking user inputs
 print("Welcome to the Food Order System!")
-type_input = input("Available Cuisines: Italian, Indian")
-display_available_meals(type_input)
-name_input = input("Enter the name of the meal you want to order:")
-amount_input = int(input("Enter the quantity you want to order:"))
+type_input = input("Available Cuisines: Italian, Indian")  # Asking user for the type of cuisine
+display_available_meals(type_input)  # Displaying available meals based on user input
+name_input = input("Enter the name of the meal you want to order:")  # Asking for meal name
+amount_input = int(input("Enter the quantity you want to order:"))  # Asking for meal quantity
 
+# Creating and displaying the order summary
 result = create_summary(name_input, amount_input, type_input)
 print(result)
