@@ -1,22 +1,34 @@
-import random
+import random  # Importing the random module to enable random choice selection
 
+# Initial message to start the game
 print("Let's play rock, paper, or scissors")
+
+# Initializing scores for player and computer wins
 player_wins = 0
 computer_wins = 0
 
+# Loop until either the player or computer wins 2 times
 while player_wins < 2 and computer_wins < 2:
+    # Asking the player to choose rock, paper, or scissors
     player_choice = input("Choose rock, paper, or scissors: ").lower()
+    # List of possible choices for the computer
     choices = ["rock", "paper", "scissors"]
+    # Randomly choosing one of the options for the computer
     computer_choice = random.choice(choices)
+    # Printing computer's choice
     print(f"Computer chose: {computer_choice}")
 
-    if (player_choice == "rock" and computer_choice == "scissors") or (player_choice == "scissors" and computer_choice == "paper") or (player_choice == "paper" and computer_choice == "rock"):
-        winner = "Player"
+    # Determining the winner based on the choices
+    if (player_choice == "rock" and computer_choice == "scissors") or \
+       (player_choice == "scissors" and computer_choice == "paper") or \
+       (player_choice == "paper" and computer_choice == "rock"):
+        winner = "Player"  # Player wins if their choice beats computer's choice
     elif player_choice == computer_choice:
-        winner = "Tie"
+        winner = "Tie"  # It's a tie if both choose the same option
     else:
-        winner = "Computer"
+        winner = "Computer"  # Otherwise, the computer wins
 
+    # Updating the score and printing the result of the round
     if winner == "Player":
         player_wins += 1
         print("You won")
@@ -25,8 +37,12 @@ while player_wins < 2 and computer_wins < 2:
         print("Computer won")
     else:
         print("It's a tie")
+
+# Printing the final score
 print(f"Final score -> Player: {player_wins}, Computer: {computer_wins}")
+
+# Announcing the overall winner
 if player_wins > computer_wins:
     print("Congratulations! You won!")
 else:
-    print("computer won!")
+    print("Computer won!")
