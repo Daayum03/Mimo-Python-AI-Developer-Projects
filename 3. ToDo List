@@ -1,33 +1,44 @@
+# Initialize an empty ToDo list
 todo_list = []
 
+# Infinite loop to keep the ToDo list application running
 while True:
-  if not todo_list:
-    print("Your ToDo list is empty")
-  else:
-    index = 1
-    for task in todo_list:
-      print(f"{index}. {task}")
-      index += 1
-
-  print("Options:")
-  print("1. Add Task")
-  print("2. Remove Task")
-  print("3. Quit")
-
-  choice = input("Enter your choice (1, 2, or 3): ")
-
-  if choice == "1":
-    print("Adding task")
-    new_task = input("Enter the task: ")
-    todo_list.append(new_task)
-    print(f"Task '{new_task}' added to the ToDo list")
-  elif choice == "2":
-    print("Removing task")
-    if todo_list:
-      removed_task = todo_list.pop()
-      print(f"Task '{removed_task}' removed from the ToDo list")
+    # If the ToDo list is empty, print a message
+    if not todo_list:
+        print("Your ToDo list is empty")
     else:
-      print("Your ToDo list is empty")
-  elif choice == "3":
-    print("Quitting")
-    break
+        # Display all tasks with index numbers if there are tasks in the list
+        index = 1
+        for task in todo_list:
+            print(f"{index}. {task}")
+            index += 1
+
+    # Display the available options for the user
+    print("Options:")
+    print("1. Add Task")
+    print("2. Remove Task")
+    print("3. Quit")
+
+    # Get the user's choice of action
+    choice = input("Enter your choice (1, 2, or 3): ")
+
+    # If user chooses to add a task
+    if choice == "1":
+        print("Adding task")
+        new_task = input("Enter the task: ")  # Prompt user for the new task
+        todo_list.append(new_task)  # Add the new task to the ToDo list
+        print(f"Task '{new_task}' added to the ToDo list")
+
+    # If user chooses to remove a task
+    elif choice == "2":
+        print("Removing task")
+        if todo_list:
+            removed_task = todo_list.pop()  # Remove the last task from the ToDo list
+            print(f"Task '{removed_task}' removed from the ToDo list")
+        else:
+            print("Your ToDo list is empty")  # Print message if list is empty
+
+    # If user chooses to quit the application
+    elif choice == "3":
+        print("Quitting")
+        break  # Exit the loop and end the program
