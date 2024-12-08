@@ -1,0 +1,51 @@
+#Import requests and os modules
+#Parse through mimo open ai message
+
+import requests
+import os
+
+api_key = os.getenv("MIMO_OPENAI_API_KEY")
+url = "https://ai.mimo.org/v1/openai/message"
+headers = {"api-key": api_key}
+
+
+def send_message(user_message, thread_id):
+    # Create a dictionary to hold the message data
+    body = {"message": user_message}
+    # If a thread ID is provided, include it in the body
+    if thread_id:
+        body["threadId"] = thread_id
+    # Send a POST request to the specified URL with headers and the JSON body
+    response = requests.post(url, headers=headers, json=body)
+    
+    # Return the JSON response from the server
+    return response.json()
+    
+current_thread_id = None
+print("Welcome! Type the message and press Enter to send.")
+print("Type 'exit' to end the program")
+print("Type 'new' to switch conversation thread.")
+print("Starting a new thread for you.\n")
+while True:
+# Prompt the user to input a message and store it in the variable `user_message`
+  user_message = input("You: ")
+# Check if the user input (case insensitive) is "exit"
+  if user_message.lower() == "exit":
+    break
+# Check if the user input (case insensitive) is "new"
+  elif user_message.lower() == "new":
+    current_thread_id = None
+    print("Started a new thread.")
+    continue
+  
+  response_data = send_message(user_message, current_thread_id)
+  latest_message = response_data.get("response")
+  current_thread_id = response_data.get("threadId")
+  print(f"GPT: {latest_message}")
+# This snippet manages a list of active threads.
+# The `threads` list keeps track of all thread IDs.
+# If the `current_thread_id` is not already in the `threads` list,
+# it adds `current_thread_id` to the list, ensuring no duplicates.
+  threads = []
+  if current_thread_id not in threads:
+    threads.append(current_thread_id)
